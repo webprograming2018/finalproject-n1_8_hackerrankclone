@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Purchase for answers</title>
+    <style>
+        .foot {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .title-block {
+            background-color: white;
+        }
+
+        a {
+            color: #4CAF50;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+    </style>
+{% endblock head %}
+
+{% block content %}
+    <div class="title-block">
+        <p>Choose answer to buy</p>
+    </div>
+    <form method="get">
+        <select name="filter" class="option">
+            <option value="memory">Memory</option>
+            <option value="cpuTime">CpuTime</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>CPU Time</th>
+            <th>Memory</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <div>
+            {% for result in results %}
+                <tr>
+                    <td>{{ result.cpu_time }}</td>
+                    <td>{{ result.memory }}</td>
+                    <td>{{ result.result_price }} points</td>
+                    <td><a href="/buy-answer/{{ result.question_id }}-{{ result.user_id }}">Buy this</a></td>
+
+                </tr>
+
+            {% endfor %}
+        </div>
+    </table>
+{% endblock content %}

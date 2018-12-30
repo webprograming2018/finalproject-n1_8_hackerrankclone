@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo2.svg') }}">
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+    <style type="text/css">
+
+
+
+        body{
+            background-color: #F3F7F7;
+        }
+
+
+        nav {
+    height: 40px;
+    width: 100%;
+    background: white;
+    font-size: 11pt;
+    font-family: 'PT Sans', Arial, sans-serif;
+    
+    position: relative;
+    
+}
+nav ul {
+    padding: 0;
+    margin: 0 auto;
+    width: 550px;
+    height: 40px;
+}
+
+nav li {
+    display: inline;
+    
+}
+
+
+
+nav a {
+    color: blue;
+    display: inline-block;
+    padding: 5px;
+
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    top: 6px;
+    
+    
+}
+
+nav li a {
+    border-right: 1px solid #576979;
+    box-sizing:border-box;
+
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+nav li:last-child a {
+    border-right: 0;
+}
+         .foot{
+
+   position: fixed;
+   bottom: 0;
+
+   
+}
+
+        .button {
+              background-color: #4CAF50;
+              border: none;
+              color: white;
+              top: 100px;
+              padding: 11px 25px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+              
+}
+
+#menu-top-left,#logo{
+    position: relative;
+    left: 80px;
+}
+#menu-top-right{
+    position: relative;
+    right: 80px;
+}
+
+    #menu-top-left li a:hover{
+        color: #4CAF50;
+    }
+
+    .submenu a:hover{
+        color: #4CAF50;
+    }
+
+    #menu-top-left li:last-child{
+        margin-left: 10px;
+    }
+@media screen and (max-width: 1195px){
+    #menu-top-right{ 
+        position: relative;
+        bottom:  60px;
+    }
+    
+    @media screen and (max-width: 848px){
+   #menu-top-left, #menu-top-right {
+    display: none;
+   }
+
+
+  
+    
+}
+
+
+
+
+ 
+    </style>
+    {% block head %}
+    {% endblock head %}
+</head>
+<body>
+{% if current_user.is_authenticated %}
+    <div id="header">
+        <div class="">
+            
+            <div  id="logo">
+                <a href="/"><img src="{{ url_for('static', filename='images/logo2.svg') }}" width="100%" height="40px"></a>
+            </div>
+            <div id="menu-top-left">
+                <ul>
+                    <li><a href="/dashboard">DashBoard</a></li>
+                    <li><a href="/leaderboard">LeaderBoard</a></li>
+                    <li><a href="/profile">   Profile</a></li>
+                    
+                </ul>
+            </div>
+            <div id="menu-top-right">
+                <ul>
+                    <li ><input type="text" name="search" placeholder="&nbsp;Search" width="80px" height="60px"></li>
+                    <li ><img src="{{ url_for('static', filename='images/icon-message.png') }}" class="icon" width="34px" height="34px"></li>
+                    <li >
+                        <a style="color: #fff;">{{ current_user.username }}</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="/profile">Score: {{ current_user.score }}</a></li>
+                                <li><a href="/leaderboard">Leader Board</a></li>
+                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% block content %}
+{% endblock content %}
+
+
+
+<nav class="foot">
+  <div align="center">
+    <ul class="">
+        <li><a href="#">Request a Feature</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Product</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Forum</a></li>
+        
+    </ul>
+    </div>
+   
+</nav>
+
+
+
+
+
+</body>
+</html>

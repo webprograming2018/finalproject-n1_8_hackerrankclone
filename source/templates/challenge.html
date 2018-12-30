@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{ question.question_name }} | {{ question.question_language }}</title>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='js/highlight/styles/monokai-sublime.css') }}">
+    <script src="{{ url_for('static', filename='js/highlight/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style type="text/css">
+
+        form select {
+            border: solid 1px;
+            color: #4CAF50;
+            float: left;
+
+        }
+
+        .title-block {
+            background-color: white;
+        }
+
+        .columns-2 {
+            width: 90%;
+            left: 50px;
+            margin-right: 10px;
+        }
+
+        .columns-2 p, h3, code {
+            text-align: left;
+        }
+
+        .foot {
+            display: none;
+        }
+
+        textarea {
+            width: 80%;
+            height: 300px;
+        }
+
+        .columns-2 textarea {
+            border-color: #4CAF50;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .btn-start {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+
+            padding: 11px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            position: relative;
+            right: 400px;
+            top: 6px;
+
+
+        }
+
+        .btn-start2 {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+
+            padding: 11px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+
+        }
+
+    </style>
+{% endblock head %}
+
+{% block content %}
+    <div id="page-label">
+        <div class="">
+            <div id="page-label-left">
+                <ul>
+                    <li>
+                        <div class="title-block">
+                            <h1>{{ question.question_name }}</h1>
+
+                        </div>
+
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="content">
+        <div id="content">
+            <div class="">
+                <div id="list-columns">
+
+
+                    <div class="columns-2">
+                        <ul class="price">
+                            <li>
+                                <h3>Content</h3>
+
+                                <p>{{ question.question_content }}</p>
+
+                                {% if test_submit is not none %}
+                                    <h3>Last commit</h3>
+                                    <pre><code>{{ test_submit }}</code></pre>
+                                {% endif %}
+                                <h3 style="color:blue;">Scores: {{ question.question_score }}</h3>
+                                <a class="btn-start" href="/list-answer/{{ question.question_id }}">Buy Answer</a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="columns-2">
+                        <ul class="price">
+                            <li>
+                                <h3>Your codes</h3>
+
+                                <textarea id="script" name="script"
+                                          placeholder="Enter your code here"></textarea>
+                                <div>
+
+                                    <button class="btn-start2">Submit</button>
+                                </div>
+
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="columns-2">
+                        <ul class="price">
+                            <li>
+                                <h2>Result</h2>
+                                <h4 id="mess" style="color:red;"></h4>
+                                <h4 id="cputime"></h4>
+                                <h4 id="memo"></h4>
+                                <h4 id="out"></h4>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                var script = $.trim($("#script").val());
+                var question_id = {{ question.question_id }};
+                var data = {
+                    script: script,
+                    question_id: question_id,
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/execute',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        if (response.message === "Success!") {
+
+
+                            var html = document.getElementById("mess").innerHTML = response.message;
+                            var html = document.getElementById("cputime").innerHTML = "CPU Time: " + response.cpuTime;
+                            var html = document.getElementById("memo").innerHTML = "Memory: " + response.memory;
+                            var html = document.getElementById("out").innerHTML = "";
+
+                        } else {
+
+                            var html = document.getElementById("mess").innerHTML = response.message;
+                            var html = document.getElementById("cputime").innerHTML = "CPU Time: " + response.cpuTime;
+                            var html = document.getElementById("memo").innerHTML = "Memory: " + response.memory;
+                            var html = document.getElementById("out").innerHTML = "Output: " + response.output.replace(/\n/g, "<br>");
+
+
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock content %}
