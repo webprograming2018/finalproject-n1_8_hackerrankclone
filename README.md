@@ -6,9 +6,9 @@
 - Phan Ngọc Thanh - B15DCCN507
 
 ## Phân công công việc
-- Phan Đức Thanh: Front-end và 1 số chức năng nhỏ
+- Phan Đức Thanh: Front-end và 1 số chức năng khác
 - Phan Ngọc Thanh: Chức năng đăng ký, đăng nhập, đăng xuất, xem bảng xếp hạng người dùng theo điểm giảm dần
-- Trần Thành Đạt: Chức năng chạy code, mua lời giải, lọc tiêu chí mua lời gian, highlight code và một số chức năng nhỏ khác
+- Trần Thành Đạt: Chức năng chạy code, mua lời giải, lọc tiêu chí mua lời gian, highlight code và một số chức năng khác
 
 ## Quá trình thực hiện
 
