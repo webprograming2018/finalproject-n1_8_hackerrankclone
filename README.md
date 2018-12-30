@@ -8,7 +8,7 @@
 ## Phân công công việc
 - Phan Đức Thanh: Front-end và 1 số chức năng khác
 - Phan Ngọc Thanh: Chức năng đăng ký, đăng nhập, đăng xuất, xem bảng xếp hạng người dùng theo điểm giảm dần
-- Trần Thành Đạt: Chức năng chạy code, mua lời giải, lọc tiêu chí mua lời gian, highlight code và một số chức năng khác
+- Trần Thành Đạt: Chức năng chạy code, mua lời giải, lọc tiêu chí mua lời giải, highlight code và một số chức năng khác
 
 ## Quá trình thực hiện
 
